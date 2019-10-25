@@ -1,0 +1,9 @@
+set line 180
+col HOST_NAME format a30
+col INSTANCE_NAME format a13
+col ARCHIVER format a15
+col VERSION format a10
+col STATUS format a10
+col DATABASE_STATUS format a15
+col INSTANCE_ROLE format a20
+select INST_ID, INSTANCE_NAME, HOST_NAME, VERSION, STARTUP_TIME, STATUS, ARCHIVER, DATABASE_STATUS, INSTANCE_ROLE from gv$instance;
