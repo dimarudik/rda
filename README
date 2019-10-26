@@ -11,11 +11,15 @@ git config --global credential.helper osxkeychain
 git remote add origin https://github.com/dimarudik/rda.git
 git push -u origin master
 
-
 # STAGE
 git status
 git add .
 git commit -m "1"
+
+# CHECKOUT
+git branch -r
+git fetch origin master
+git checkout master
 
 #CLONE
 git clone https://github.com/dimarudik/rda.git
