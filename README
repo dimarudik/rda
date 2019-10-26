@@ -1,0 +1,21 @@
+# INIT
+git init
+git status
+git add ./*
+git config --global --edit
+git commit -m "Initial commit"
+
+# PUSH REMOTE
+git credential-osxkeychain
+git config --global credential.helper osxkeychain
+git remote add origin https://github.com/dimarudik/rda.git
+git push -u origin master
+
+
+# STAGE
+git status
+git add .
+git commit -m "A1"
+
+#CLONE
+git clone https://github.com/dimarudik/rda.git
