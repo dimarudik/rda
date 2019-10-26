@@ -15,7 +15,7 @@ git push -u origin master
 # STAGE
 git status
 git add .
-git commit -m "A1"
+git commit -m "1"
 
 #CLONE
 git clone https://github.com/dimarudik/rda.git
