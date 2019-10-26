@@ -1,6 +1,6 @@
 col sql_id for a16
 col SQL_OPNAME for a12
-col object_type for a16
+col object_type for a20
 col object_name for a30
 select * from 
 (
