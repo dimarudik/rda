@@ -231,11 +231,11 @@ col "DEFAULT" for a13
 col low_value for a30
 col high_value for a30
 col comments for a70
-select 	
+select
 		dtc.column_name, 
 		dtc.data_type||decode(dtc.char_length,	0,
-												decode(dtc.data_precision,null,null,'('||dtc.data_precision||','||dtc.data_scale||')'),
-												'('||dtc.char_length||decode(dtc.char_used,'B',' BYTE','C',' CHAR')||')') as data_type,
+		decode(dtc.data_precision,null,null,'('||dtc.data_precision||','||dtc.data_scale||')'),
+		'('||dtc.char_length||decode(dtc.char_used,'B',' BYTE','C',' CHAR')||')') as data_type,
 		dtc.nullable,
 		dtc.data_default as "DEFAULT",
 		dtc.histogram,
@@ -287,13 +287,16 @@ select
 		dcc.comments
 	from 
 		dba_tab_columns dtc,
-		dba_col_comments dcc
+		dba_col_comments dcc,
+		dba_tables dt
 	where 
 		dtc.OWNER = upper(:OWNER) and 
 		upper(dtc.table_name) = upper(:ONAME) and
 		dtc.owner = dcc.owner and
 		dtc.table_name = dcc.table_name and
-		dtc.column_name = dcc.column_name
+		dtc.column_name = dcc.column_name and
+		dt.owner = dtc.owner and
+		dt.table_name = dtc.table_name
 	order by dtc.column_id;
 -- 
 -- Indexes
