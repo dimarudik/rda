@@ -24,4 +24,4 @@ git pull https://github.com/dimarudik/rda.git
 git clone https://github.com/dimarudik/rda.git
 
 # VIEW COMMITS
-git log --pretty=format:"%h %s" --graph
+git log --pretty=format:"%h - %s - %cd" --graph

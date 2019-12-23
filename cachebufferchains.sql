@@ -7,8 +7,8 @@ select * from
 	select 
 	      count(*) cnt, 
               --session_id,	
-	      sql_id, 
-	      SQL_OPNAME,
+	      --sql_id, 
+	      --SQL_OPNAME,
 	      o.object_type,
               ash.current_obj# object_id,
 	      o.object_name,
@@ -23,8 +23,8 @@ select * from
 		and CURRENT_BLOCK# <> 0
 	group by
 		--session_id, 
-		sql_id, 
-	        SQL_OPNAME, 
+		--sql_id, 
+	        --SQL_OPNAME, 
 	        current_obj#, 
 	        current_file#,
 	        current_block#, 
