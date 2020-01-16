@@ -26,7 +26,7 @@ SELECT  o.object_id,
 FROM    dba_objects o,
         v$bh bh
 WHERE   o.data_object_id = bh.objd
-        and o.owner not in ('SYS', 'SYSTEM','GSMADMIN_INTERNAL','XDB','PERFSTAT','OUTLN')
+        and o.owner not in ('SYS', 'SYSTEM','GSMADMIN_INTERNAL','XDB','PERFSTAT','OUTLN','DBSNMP','AUDSYS','WMSYS')
         and decode(:objd,-1,objd,:objd) = objd
 GROUP BY
         o.object_id, 
