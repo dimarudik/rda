@@ -16,8 +16,8 @@ col ELAPSED_AVG for 99,999.999999
 col LAST_ACTIVE_TIME for a22
 col EXACT_MATCH_SIGNATURE for 999999999999999999999
 col parsing_schema_name for a16
-var parsing_schema_name varchar2(256);
-exec :parsing_schema_name:= '&1';
+var FORCE_MATCHINF_SIGNATURE number;
+exec :FORCE_MATCHINF_SIGNATURE := &1;
 select * from (
 select
         sql_id,
@@ -35,17 +35,13 @@ select
         decode(IO_CELL_OFFLOAD_ELIGIBLE_BYTES,0,'No','Yes') is_off,
         round((elapsed_time/decode(executions,0,1,executions))/1000000,7) elapsed_avg,
         last_active_time,
+        --exact_matching_signature exact_match_signature,
         parsing_schema_name,
 	sql_text sqltext
         --substr(sql_text,1,450) as sqltext
   from
         v$sql
   where
-	parsing_schema_name not in ('SYS','SYSTEM','DBSNMP') and
-	upper(sql_text) like 'INSERT%' and
-	parsing_schema_name = decode(:parsing_schema_name,'-1',parsing_schema_name,upper(:parsing_schema_name))
---	sql_id = :SQL_ID
-  order by
-	executions desc
-) where rownum <= 30
-  order by execs;
+	force_matching_signature = :FORCE_MATCHINF_SIGNATURE
+  order by last_active_time desc
+) where rownum <= 30 order by last_active_time;

@@ -65,7 +65,8 @@ WITH t1 AS
                 user$ u,
                 v$bh bh
         WHERE   o.obj# = bh.objd
-                and u.name not in ('SYS', 'SYSTEM', 'XDB', 'AUDSYS', 'DBSNMP')
+        	and u.name not in ('SYS', 'SYSTEM','GSMADMIN_INTERNAL','XDB','PERFSTAT','OUTLN','DBSNMP','AUDSYS','WMSYS')
+                --and u.name not in ('SYS', 'SYSTEM', 'XDB', 'AUDSYS', 'DBSNMP')
                 and bh.status != 'free'
                 and o.owner# = u.user#
                 and decode(:objd,-1,objd,:objd) = objd
@@ -96,7 +97,7 @@ GROUP BY
         t1.owner,
         object_name,
         object_type
-        having sum (num_blocks) > 10
+        --having sum (num_blocks) > 10
 ORDER BY SUM(num_blocks);
 /*
 WITH t1 AS

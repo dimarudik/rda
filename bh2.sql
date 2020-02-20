@@ -1,13 +1,13 @@
 --set line 340
 set pagesize 36
-set line 340
+--set line 340
 col owner for a16
 col object_name for a34
 col object_type for a22
 col subobject_name for a30
 var objd number;
 exec :objd := &1;
-SELECT  o.object_id,
+SELECT  o.data_object_id,
         o.owner owner,
         o.object_name object_name,
         o.subobject_name subobject_name,
@@ -29,7 +29,7 @@ WHERE   o.data_object_id = bh.objd
         and o.owner not in ('SYS', 'SYSTEM','GSMADMIN_INTERNAL','XDB','PERFSTAT','OUTLN','DBSNMP','AUDSYS','WMSYS')
         and decode(:objd,-1,objd,:objd) = objd
 GROUP BY
-        o.object_id, 
+        o.data_object_id, 
         o.owner,
         o.object_name,
         o.subobject_name,
