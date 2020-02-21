@@ -8,6 +8,7 @@ git commit -m "Initial commit"
 # PUSH REMOTE
 git credential-osxkeychain
 git config --global credential.helper osxkeychain
+git credential-osxkeychain get
 git remote add origin https://github.com/dimarudik/rda.git
 git push -u origin master
 

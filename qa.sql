@@ -1,3 +1,4 @@
+--set numwidth 20
 col plan_hash_v for 9999999999
 col hash_value for 9999999999
 col sql_id for a14
@@ -10,7 +11,7 @@ col buffer_gets for 99999999
 col avgdiskreads for 999,999,999.99
 col avgbuffergets for 999,999,999.99
 col PARSE_CALLS for 9999999999
-col sqltext for a32
+--col sqltext for a32
 col ELAPSED_AVG for 9,999.999999
 col LAST_ACTIVE_TIME for a20
 col EXACT_MATCH_SIGNATURE for 999999999999999999999
