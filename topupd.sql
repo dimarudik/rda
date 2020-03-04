@@ -43,7 +43,7 @@ select
   where
 	parsing_schema_name not in ('SYS','SYSTEM','DBSNMP') and
 	upper(sql_text) like 'UPDATE%' and
-	parsing_schema_name = decode(:parsing_schema_name,'-1',parsing_schema_name,:parsing_schema_name)
+	parsing_schema_name = upper(decode(:parsing_schema_name,'-1',parsing_schema_name,:parsing_schema_name))
 --	sql_id = :SQL_ID
   order by
 	executions desc
