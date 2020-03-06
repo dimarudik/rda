@@ -12,10 +12,12 @@ git credential-osxkeychain get
 git remote add origin https://github.com/dimarudik/rda.git
 git push -u origin master
 
-# STAGE
+# how to make COMMIT
 git status
 git add .
 git commit -m "1"
+
+# how to push changes to remote
 git push -u origin master
 
 # PULL
@@ -26,3 +28,12 @@ git clone https://github.com/dimarudik/rda.git
 
 # VIEW COMMITS
 git log --pretty=format:"%h - %s - %cd" --graph
+
+# how to create BRANCH
+git branch
+git branch flow
+git checkout flow
+git push -u origin flow
+
+# how to clone remote BRANCH
+git clone -b Sharding https://github.com/dimarudik/rest-jpa.git rest-jpa
