@@ -37,4 +37,5 @@ git checkout flow
 git push -u origin flow
 
 # how to clone remote BRANCH
+git clone -b flow https://github.com/dimarudik/rda.git
 git clone -b Sharding https://github.com/dimarudik/rest-jpa.git rest-jpa
