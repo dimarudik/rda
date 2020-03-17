@@ -64,7 +64,7 @@ WITH t1 AS
                 obj$ o,
                 user$ u,
                 v$bh bh
-        WHERE   o.obj# = bh.objd
+        WHERE   o.dataobj# = bh.objd
         	and u.name not in ('SYS', 'SYSTEM','GSMADMIN_INTERNAL','XDB','PERFSTAT','OUTLN','DBSNMP','AUDSYS','WMSYS')
                 --and u.name not in ('SYS', 'SYSTEM', 'XDB', 'AUDSYS', 'DBSNMP')
                 and bh.status != 'free'
