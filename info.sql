@@ -11,25 +11,31 @@ set pagesize 70
 col owner for a20
 col table_name for a20
 col table_owner for a20
-col partition_name for a16
-col keypart_col for a16
+col "PartName" for a16
+col "PartType" for a8
+col "SPartName" for a13
+col "SPartType" for a9
+col "KeyPartCol" for a12
 col high_value for a34
 col low_v for a20
 col last_analyzed for a20
 col high_v for a20
-col initrs for 999
+col ini for 999
 col num_rows for 99,999,999,999
 col blocks for 9,999,999,999
-col avg_row_len for 9999999
+col "AvgRowLen" for 99999
 col sample_size for 999999999999
-col subpartition_name for a20
 col tbs_name for a16
 col comments for a34
 var OWNER varchar2(256);
 var ONAME varchar2(256);
 exec :OWNER := UPPER(SUBSTR('&1',1,INSTR('&1','.')-1));
 exec :ONAME := UPPER(SUBSTR('&1',INSTR('&1','.')+1));
-select TABLE_NAME, LAST_ANALYZED, PARTITION_NAME, PART_TYPE, SUBPARTITION_NAME, SUBPART_TYPE, PART_COL KEYPART_COL, HIGH_VALUE, low_v, high_v, NUM_ROWS, BLOCKS, AVG_ROW_LEN, SAMPLE_SIZE, tablespace_name as tbs_name, INI_TRANS initrs, COMMENTS from 
+select TABLE_NAME, LAST_ANALYZED, PARTITION_NAME "PartName", PART_TYPE "PartType", SUBPARTITION_NAME "SPartName", SUBPART_TYPE "SPartType", PART_COL "KeyPartCol", HIGH_VALUE, low_v, high_v, NUM_ROWS, BLOCKS, AVG_ROW_LEN "AvgRowLen", 
+--SAMPLE_SIZE, 
+tablespace_name as tbs_name, INI_TRANS ini
+--, COMMENTS 
+from 
     (
     	-- TABLE info
 		select 
@@ -226,18 +232,19 @@ select TABLE_NAME, LAST_ANALYZED, PARTITION_NAME, PART_TYPE, SUBPARTITION_NAME, 
 -- 
 -- 
 col column_name for a30
-col data_type for a30
-col "DEFAULT" for a13
+col "DataType" for a24
+col "Default" for a10
 col low_value for a30
 col high_value for a30
-col comments for a70
+col comments for a50
+col histogram for a12
 select
 		dtc.column_name, 
 		dtc.data_type||decode(dtc.char_length,	0,
 		decode(dtc.data_precision,null,null,'('||dtc.data_precision||','||dtc.data_scale||')'),
-		'('||dtc.char_length||decode(dtc.char_used,'B',' BYTE','C',' CHAR')||')') as data_type,
+		'('||dtc.char_length||decode(dtc.char_used,'B',' BYTE','C',' CHAR')||')') as "DataType",
 		dtc.nullable,
-		dtc.data_default as "DEFAULT",
+		dtc.data_default as "Default",
 		dtc.histogram,
 		dtc.last_analyzed,
 		dtc.num_distinct,
@@ -301,17 +308,18 @@ select
 -- 
 -- Indexes
 --
-col index_name for a37
+col "IndexName" for a22
 col UNIQUENESS for a10
+col "PartName" for a13
 col tablespace_name for a18
-col columns for a60
+col columns for a21
 col blevel for 999999
 col leaf_blocks for 999,999,999
-col IND_T for a20
+col IND_T for a17
 col index_type for a12
 col status for a10
-col VISIBILITY for a16
-select INDEX_NAME, UNIQUENESS, IND_T, INDEX_TYPE, PARTITION_NAME, SUBPARTITION_NAME, LAST_ANALYZED, TABLESPACE_NAME, INI_TRANS initrs, BLEVEL, LEAF_BLOCKS, DISTINCT_KEYS, NUM_ROWS, CLUSTERING_FACTOR, STATUS, VISIBILITY, COLUMNS 
+col VISIBILITY for a12
+select INDEX_NAME "IndexName", UNIQUENESS, IND_T, INDEX_TYPE, PARTITION_NAME "PartName", SUBPARTITION_NAME "SPartName", LAST_ANALYZED, TABLESPACE_NAME, INI_TRANS "Ini", BLEVEL, LEAF_BLOCKS, DISTINCT_KEYS, NUM_ROWS, CLUSTERING_FACTOR, STATUS, VISIBILITY, COLUMNS 
 from
 (
 	-- GLOBAL NON-PARTITIONED
@@ -517,7 +525,18 @@ from
 col inserts for 9,999,999,999
 col updates for 9,999,999,999
 col deletes for 9,999,999,999
-select * from dba_tab_modifications where table_owner = upper(:owner) and upper(table_name) = upper(:oname) order by partition_name nulls first, subpartition_name nulls first;
+select 
+	TABLE_OWNER,
+	TABLE_NAME,
+	PARTITION_NAME "PartName",
+	SUBPARTITION_NAME "SPartName",
+	INSERTS,
+	UPDATES,
+	DELETES,
+	TIMESTAMP,
+	TRUNCATED,
+	DROP_SEGMENTS
+from dba_tab_modifications where table_owner = upper(:owner) and upper(table_name) = upper(:oname) order by partition_name nulls first, subpartition_name nulls first;
 --
 --
 --
@@ -529,7 +548,7 @@ col trigger_name for a30
 col trigger_type for a20
 col triggering_event for a20
 col referencing_names for a40
-col when_clause for a150
+col when_clause for a90
 select 
 	trigger_name, 
 	trigger_type, 
