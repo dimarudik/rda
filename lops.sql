@@ -3,8 +3,8 @@ col target for a30
 col target_desc for a30
 col sid for 999999
 col serial# for 999999
-col sofar for 999,999,999 
-col totalwork for 999,999,999
+col sofar for 99,999,999,999 
+col totalwork for 99,999,999,999
 col TIME_REMAIN for 999,999
 col ELAPSED_SECONDS for 999,999
 var s number;
