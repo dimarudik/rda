@@ -25,7 +25,7 @@ where
 	st.sql_id = :SQL_ID and 
 	sn.snap_id = st.snap_id and 
         st.executions_delta <> 0 and
-	trunc(sn.begin_interval_time,'dd') > sysdate - 6
+	trunc(sn.begin_interval_time,'dd') > sysdate - 10
 group by 
 	trunc(sn.begin_interval_time,'HH24'), 
         st.plan_hash_value
