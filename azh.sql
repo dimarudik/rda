@@ -5,7 +5,7 @@ col "Elapsed Avg" for 999.999999
 col "BufferGets" for 99,999,999,999
 col "DiskReads" for 99,999,999,999
 col "BufferGets Avg" for 999,999,999.999
-col "DiskReads Avg" for 999.999
+col "DiskReads Avg" for 999,999.999
 var SQL_ID varchar2(256);
 exec :SQL_ID:= '&1';
 select 

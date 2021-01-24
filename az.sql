@@ -5,7 +5,7 @@ col "Elapsed Avg" for 999.999999
 col "BufferGets" for 99,999,999,999
 col "DiskReads" for 99,999,999,999
 col "BufferGets Avg" for 999,999,999.999
-col "DiskReads Avg" for 999.999
+col "DiskReads Avg" for 999,999.999
 var SQL_ID varchar2(256);
 exec :SQL_ID:= '&1';
 select 
@@ -46,7 +46,7 @@ from
         dba_hist_snapshot sn,
         dba_hist_sqlstat st
 where
-        st.sql_id in ('d5smkxyf2nrgc','bwvvpgjnkgmxy') and
+        st.sql_id in ('d5smkxyf2nrgc','bwvvpgjnkgmxy','apn3ju2k4c556') and
         sn.snap_id = st.snap_id and
         sn.dbid = 878161549 and
         st.dbid = 878161549
