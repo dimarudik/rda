@@ -12,12 +12,10 @@ git credential-osxkeychain get
 git remote add origin https://github.com/dimarudik/rda.git
 git push -u origin master
 
-# how to make COMMIT
+# how to make COMMIT + PUSH
 git status
 git add .
 git commit -m "1"
-
-# how to push changes to remote
 git push -u origin master
 
 # PULL
