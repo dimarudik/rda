@@ -1,18 +1,21 @@
-col blocker for a20
-col blocker_sid for 999999
-col blocker_sess_status for a19
+col blocker for a14
+col blockersid for 999999
+col blockerstatus for a13
 col blocker_lock_type for a18
 col description for a20
-col blockee for a20
+col blocked for a14
+col blockedsid for 999999
 col blockee_lock_type for a18
 col lmode_desc for a12
 col request_desc for a18
 col status for a18
+col sql_id for a13
 select 
 	gv1.username blocker,
-	a.sid blocker_sid, 
-	gv1.serial# blocker_serial#, 
-	gv1.status blocker_sess_status, 
+	a.sid blockersid, 
+	gv1.sql_id,
+	--gv1.serial# blocker_serial#, 
+	gv1.status blockerstatus, 
 	a.type blocker_lock_type, 
     	decode(a.TYPE,
         	'MR', 'Media Recovery',
@@ -34,8 +37,9 @@ select
         	'SQ', 'Sequence Number',
         	'TE', 'Extend Table',
         	'TT', 'Temp Table', a.type) description,
-	(select username from gv$session where sid = b.sid) blockee,
-	b.sid blockee_sid, 
+	(select username from gv$session where sid = b.sid) blocked,
+	b.sid blockedsid, 
+	gv2.sql_id,
     decode(a.LMODE,
         0, 'None',
         1, 'Null',
@@ -63,11 +67,13 @@ select
 from 
 	gv$lock a, 
 	gv$lock b,
-	gv$session gv1
+	gv$session gv1,
+        gv$session gv2
 where 
 	a.block = 1 and 
 	b.request > 0 and 
 	a.id1 = b.id1 and 
 	a.id2 = b.id2 and
-	a.sid = gv1.sid
+	a.sid (+) = gv1.sid and
+        b.sid (+) = gv2.sid
 order by 1,2;

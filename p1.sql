@@ -40,5 +40,5 @@ select
 from 
 	v$session v 
 where 
-	sid = decode(:s,-1,sid,:s)
-	&2;
+	sid = decode(:s,-1,sid,:s);
+--	&2;

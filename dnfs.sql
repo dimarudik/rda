@@ -1,4 +1,4 @@
-col SVRNAME for a30
+col SVRNAME for a32
 col PATH for a30
 col LOCAL for a30
 col DIRNAME for a30

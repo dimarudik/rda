@@ -18,8 +18,9 @@ git add .
 git commit -m "1"
 git push -u origin master
 
-# PULL
+# PULL to get remote changes ( option --rebase is needed if there are uncommited local changes )
 #git pull https://github.com/dimarudik/rda.git
+git pull origin master
 
 #CLONE
 git clone https://github.com/dimarudik/rda.git
