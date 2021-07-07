@@ -1,14 +1,14 @@
 --col sid for a15
 set numwidth 16
 col sessid for 99999
-col event for a38
+col event for a42
 col machine for a29
-col program for a24
+col program for a27
 col osuser for a8
 col username for a8
 col sample_time for a26
 col obj for 99999999
-col objname for a12
+col objname for a29
 col subobname for a10
 col sql_id for a13
 col "Temp Gb" for 99999
@@ -24,7 +24,7 @@ select
 	v.p1, 
 	v.p2, 
 	--v.current_obj#, 
-	v.sql_id, 
+	--v.sql_id, 
 	v.sql_exec_start, 
 	v.machine, 
 	v.program, 

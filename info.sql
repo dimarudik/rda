@@ -535,7 +535,8 @@ select
 	DELETES,
 	TIMESTAMP,
 	TRUNCATED,
-	DROP_SEGMENTS
+	DROP_SEGMENTS,
+        (select last_analyzed from dba_tables t where t.owner = dba_tab_modifications.table_owner and t.table_name = dba_tab_modifications.table_name) last_analyzed
 from dba_tab_modifications where table_owner = upper(:owner) and upper(table_name) = upper(:oname) order by partition_name nulls first, subpartition_name nulls first;
 --
 --

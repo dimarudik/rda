@@ -5,7 +5,7 @@ col "Elapsed Avg" for 999.999999
 col "BufferGets" for 99,999,999,999
 col "DiskReads" for 99,999,999,999
 col "BufferGets Avg" for 999,999,999.999
-col "DiskReads Avg" for 999.999
+col "DiskReads Avg" for 999,999.999
 var SQL_ID varchar2(256);
 exec :SQL_ID:= '&1';
 select 
@@ -25,7 +25,7 @@ where
 	st.sql_id = :SQL_ID and 
 	sn.snap_id = st.snap_id and 
         st.executions_delta <> 0 and
-	sn.begin_interval_time > sysdate - 1 / 12
+	sn.begin_interval_time > sysdate - 1 / 6
 group by 
 	trunc(sn.begin_interval_time,'MI'), 
         st.plan_hash_value
